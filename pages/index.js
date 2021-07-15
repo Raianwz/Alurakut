@@ -32,7 +32,7 @@ export default function Home() {
             <h1 className="title">
               Bem vindo(a)
             </h1>
-            <OrkutNostalgicIconSet />g
+            <OrkutNostalgicIconSet />
           </Box>
         </div>
         <div className="comunityArea" style={{ gridArea: 'comunityArea' }}>
