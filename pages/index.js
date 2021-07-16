@@ -19,6 +19,14 @@ function ProfileSidebar(props) {
   )
 }
 
+function ProfileCommunityBox(props) {
+  return (
+    <ProfileUsersBoxWrapper>
+      <h2 className="smallTitle">{props.title}({props.items.length})</h2>
+    </ProfileUsersBoxWrapper>
+  )
+}
+
 export default function Home() {
   const githubUser = 'raianwz';
   const [comunidades, setComunidades] = React.useState([{
@@ -26,9 +34,17 @@ export default function Home() {
     title: 'Eu odeia acordar cedo',
     image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg',
   }]);
-  //  const comunidades = ['Alurakut'];
   const pessoasGit = ['Chatterino', 'joaocarloslima', 'omariosouto', 'peas']
-
+  const [seguidores, setSeguidores] = React.useState([]);
+  React.useEffect(() => {
+    fetch('https://api.github.com/users/Raianwz/followers')
+      .then((respServidor) => {
+        return respServidor.json();
+      })
+      .then((respFull) => {
+        setSeguidores(respFull)
+      })
+  }, [])
   return (
     <>
       <AlurakutMenu githubUser={githubUser} />
@@ -74,9 +90,10 @@ export default function Home() {
             </form>
           </Box>
         </div>
-        <div className="comunityArea" style={{ gridArea: 'comunityArea' }}>
+        <div className="communityArea" style={{ gridArea: 'communityArea' }}>
+          <ProfileCommunityBox title={"Seguidores"} items={seguidores} />
           <ProfileUsersBoxWrapper>
-          <h2>Comunidades({comunidades.length})</h2>
+            <h2 className="smallTitle">Comunidades({comunidades.length})</h2>
             <ul>
               {comunidades.map((itemAtual) => {
                 return (
@@ -91,7 +108,7 @@ export default function Home() {
             </ul>
           </ProfileUsersBoxWrapper>
           <ProfileUsersBoxWrapper>
-            <h2>Usuários da comunidade({pessoasGit.length})</h2>
+            <h2 className="smallTitle">Usuários da comunidade({pessoasGit.length})</h2>
             <ul>
               {pessoasGit.map((itemAtual) => {
 
