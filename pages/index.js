@@ -42,6 +42,7 @@ export default function Home() {
               Bem vindo(a)
             </h1>
             <OrkutNostalgicIconSet />
+<<<<<<< HEAD
           </Box>
           <Box>
             <h2 className="subTitle">Formulário</h2>
@@ -72,6 +73,8 @@ export default function Home() {
               </div>
               <button>Criar Comunidade</button>
             </form>
+=======
+>>>>>>> 87855cc701d957fbd6f91ec2b447ca10b05245a7
           </Box>
         </div>
         <div className="comunityArea" style={{ gridArea: 'comunityArea' }}>
