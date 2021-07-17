@@ -23,26 +23,68 @@ function ProfileCommunityBox(props) {
   return (
     <ProfileUsersBoxWrapper>
       <h2 className="smallTitle">{props.title}({props.items.length})</h2>
+      <ul>
+        {props.items.map((itemAtual) => {
+          let imgUrl = itemAtual.imageUrl
+          let title = itemAtual.title
+          if (props.type === 'followers') {
+            imgUrl = itemAtual.avatar_url
+            title = itemAtual.login
+          }
+          return (
+            <li key={itemAtual.id}>
+              <a href={`/${props.type}/${itemAtual.id}`}>
+                <img src={imgUrl} alt={title} />
+                <span>{title}</span>
+              </a>
+            </li>
+          )
+        })
+
+        }
+      </ul>
     </ProfileUsersBoxWrapper>
   )
 }
 
 export default function Home() {
   const githubUser = 'raianwz';
-  const [comunidades, setComunidades] = React.useState([{
-    id: '0101010101010',
-    title: 'Eu odeia acordar cedo',
-    image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg',
-  }]);
-  const pessoasGit = ['Chatterino', 'joaocarloslima', 'omariosouto', 'peas']
+  const [comunidades, setComunidades] = React.useState([]);
+  const pessoasGit = ['Chatterino', 'joaocarloslima', 'omariosouto', 'peas', 'diolinux']
   const [seguidores, setSeguidores] = React.useState([]);
   React.useEffect(() => {
+    //Get GitHub api
     fetch('https://api.github.com/users/Raianwz/followers')
       .then((respServidor) => {
         return respServidor.json();
       })
       .then((respFull) => {
         setSeguidores(respFull)
+      })
+
+
+    //Api GraphQL
+    fetch('https://graphql.datocms.com/', {
+      method: 'POST',
+      headers: {
+        'Authorization': '431dfa84b0df0fc5c4d528a1a56e96',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        "query": `query{
+        allCommunities {
+          id
+          title
+          imageUrl
+          creatorSlug
+        }
+      }`})
+    })
+      .then((response) => response.json())
+      .then((respFull) => {
+        const comunidadesDato = respFull.data.allCommunities
+        setComunidades(comunidadesDato)
       })
   }, [])
   return (
@@ -67,12 +109,23 @@ export default function Home() {
               console.log('Campo: ', dadosForm.get('title'))
               console.log('Campo: ', dadosForm.get('image'))
               const comunidade = {
-                id: new Date().toISOString(),
                 title: dadosForm.get('title'),
-                image: dadosForm.get('image'),
+                imageUrl: dadosForm.get('image'),
+                creatorSlug: githubUser,
               }
-              const comunidadeAtualziadas = [...comunidades, comunidade]
-              setComunidades(comunidadeAtualziadas)
+              fetch('/api/comunidades', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(comunidade)
+              }).then(async (response) => {
+                const dados = await response.json();
+                console.log(dados.registroCriado)
+                const comunidade = dados.registroCriado
+                const comunidadeAtualziadas = [...comunidades, comunidade]
+                setComunidades(comunidadeAtualziadas)
+              })
             }}>
               <div>
                 <input
@@ -91,22 +144,8 @@ export default function Home() {
           </Box>
         </div>
         <div className="communityArea" style={{ gridArea: 'communityArea' }}>
-          <ProfileCommunityBox title={"Seguidores"} items={seguidores} />
-          <ProfileUsersBoxWrapper>
-            <h2 className="smallTitle">Comunidades({comunidades.length})</h2>
-            <ul>
-              {comunidades.map((itemAtual) => {
-                return (
-                  <li key={itemAtual.id}>
-                    <a href={`/users/${itemAtual.title}`}>
-                      <img src={itemAtual.image} />
-                      <span>{itemAtual.title}</span>
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
-          </ProfileUsersBoxWrapper>
+          <ProfileCommunityBox title={"Seguidores"} items={seguidores} type={'followers'} />
+          <ProfileCommunityBox title={"Comunidades"} items={comunidades} type={'communities'} />
           <ProfileUsersBoxWrapper>
             <h2 className="smallTitle">Usuários da comunidade({pessoasGit.length})</h2>
             <ul>
