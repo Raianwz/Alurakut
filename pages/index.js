@@ -1,4 +1,6 @@
 import React from 'react'
+import nookies from 'nookies'
+import jwt from 'jsonwebtoken'
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons'
@@ -47,14 +49,15 @@ function ProfileCommunityBox(props) {
   )
 }
 
-export default function Home() {
-  const githubUser = 'raianwz';
+export default function Home(props) {
+  const githubUser = props.githubUser;
   const [comunidades, setComunidades] = React.useState([]);
   const pessoasGit = ['Chatterino', 'joaocarloslima', 'omariosouto', 'peas', 'diolinux']
   const [seguidores, setSeguidores] = React.useState([]);
+
   React.useEffect(() => {
     //Get GitHub api
-    fetch('https://api.github.com/users/Raianwz/followers')
+    fetch(`https://api.github.com/users/${githubUser}/followers`)
       .then((respServidor) => {
         return respServidor.json();
       })
@@ -166,4 +169,29 @@ export default function Home() {
       </MainGrid>
     </>
   )
+}
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context)
+  const token = cookies.USER_TOKEN
+  console.log('Token decodificado:', jwt.decode(token))
+  const { isAuthenticated } = await fetch('https://alurakut-delta-mocha.vercel.app/api/auth', { 
+    headers: { 
+      'Authorization': token 
+    } 
+  })
+    .then((resp) => resp.json())
+  if (!isAuthenticated) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      }
+    }
+  }
+  const { githubUser } = jwt.decode(token)
+  return {
+    props: {
+      githubUser
+    }, // will be passed to the page component as props
+  }
 }
