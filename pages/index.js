@@ -22,11 +22,15 @@ function ProfileSidebar(props) {
 }
 
 function ProfileCommunityBox(props) {
+  let total = null;
+  if(props.type === 'followers'){
+      total = props.total
+  }
   return (
     <ProfileUsersBoxWrapper>
-      <h2 className="smallTitle">{props.title}({props.items.length})</h2>
+      <h2 className="smallTitle">{props.title}({total===null?props.items.length:total})</h2>
       <ul>
-        {props.items.map((itemAtual) => {
+        {props.items.slice(0, 6).map((itemAtual) => {
           let imgUrl = itemAtual.imageUrl
           let title = itemAtual.title
           if (props.type === 'followers') {
@@ -54,6 +58,7 @@ export default function Home(props) {
   const [comunidades, setComunidades] = React.useState([]);
   const pessoasGit = ['Chatterino', 'joaocarloslima', 'omariosouto', 'peas', 'diolinux']
   const [seguidores, setSeguidores] = React.useState([]);
+  const [totalFollowers, setTotalFollowers] = React.useState([]);
 
   React.useEffect(() => {
     //Get GitHub api
@@ -63,7 +68,17 @@ export default function Home(props) {
       })
       .then((respFull) => {
         setSeguidores(respFull)
+        console.log(respFull)
       })
+    fetch(`https://api.github.com/users/${githubUser}`)
+      .then((respServidor) => {
+        return respServidor.json();
+      })
+      .then((respFT) => {
+        const total = respFT.followers
+        setTotalFollowers(total)
+      })
+
 
 
     //Api GraphQL
@@ -147,8 +162,8 @@ export default function Home(props) {
           </Box>
         </div>
         <div className="communityArea" style={{ gridArea: 'communityArea' }}>
-          <ProfileCommunityBox title={"Seguidores"} items={seguidores} type={'followers'} />
-          <ProfileCommunityBox title={"Comunidades"} items={comunidades} type={'communities'} />
+          <ProfileCommunityBox title={"Comunidades"} items={comunidades} type={'communities'} total={null}/>
+          <ProfileCommunityBox title={"Seguidores"} items={seguidores} type={'followers'} total={totalFollowers}/>
           <ProfileUsersBoxWrapper>
             <h2 className="smallTitle">Usuários da comunidade({pessoasGit.length})</h2>
             <ul>
