@@ -1062,6 +1062,13 @@ cross-env@^6.0.3:
   dependencies:
     cross-spawn "^7.0.0"
 
+cross-fetch@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.4.tgz#9723f3a3a247bf8b89039f3a380a9244e8fa2f39"
+  integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
+  dependencies:
+    node-fetch "2.6.1"
+
 cross-spawn@^7.0.0:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
@@ -1169,10 +1176,10 @@ data-uri-to-buffer@3.0.1:
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-3.0.1.tgz#594b8973938c5bc2c33046535785341abc4f3636"
   integrity sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==
 
-datocms-client@^3.5.8:
-  version "3.5.8"
-  resolved "https://registry.yarnpkg.com/datocms-client/-/datocms-client-3.5.8.tgz#98d0c98186420ebc0ee04ed78472a7df32676dac"
-  integrity sha512-PIOu3vJQApIq9zoEDLZvJS3w8JhUinFN2zSdmxtOMRgPO2iI+3850BH3a2B+zLI9SraamAMJDDOLNcoEbCjOtQ==
+datocms-client@^3.5.9:
+  version "3.5.9"
+  resolved "https://registry.yarnpkg.com/datocms-client/-/datocms-client-3.5.9.tgz#3da13bc8f1b69501dba3cd1fd6334ca42c65648f"
+  integrity sha512-f1Dy6hNKTx/wN/jKpOf8Q3SMkOQFqOxuirN+lZ1I+FVQLEY5r0/D6Xc5BVBOK0mV92DPwrPK5GfyEoZ7S75UJA==
   dependencies:
     "@iarna/toml" "^2.2.3"
     arr-diff "^4.0.0"
@@ -1183,6 +1190,7 @@ datocms-client@^3.5.8:
     contentful-management "^7.9.0"
     core-js "^3.4.8"
     cross-env "^6.0.3"
+    cross-fetch "^3.1.4"
     datocms-contentful-to-structured-text "^1.1.3"
     datocms-structured-text-utils "^1.0.15"
     denodeify "^1.2.1"
@@ -1193,7 +1201,6 @@ datocms-client@^3.5.8:
     https-proxy-agent "^4.0.0"
     humps "^2.0.1"
     inflected "^2.0.4"
-    isomorphic-fetch "^3.0.0"
     js-yaml "^3.13.1"
     json-schema-ref-parser "^7.1.2"
     jsonref "^5.2.1"
@@ -2164,14 +2171,6 @@ isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
-isomorphic-fetch@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-3.0.0.tgz#0267b005049046d2421207215d45d6a262b8b8b4"
-  integrity sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==
-  dependencies:
-    node-fetch "^2.6.1"
-    whatwg-fetch "^3.4.1"
-
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
@@ -2658,7 +2657,7 @@ next@latest:
     "@next/swc-win32-ia32-msvc" "12.0.2"
     "@next/swc-win32-x64-msvc" "12.0.2"
 
-node-fetch@2.6.1, node-fetch@^2.6.1:
+node-fetch@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
@@ -3904,11 +3903,6 @@ webpack-sources@^1.4.0:
   dependencies:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
-
-whatwg-fetch@^3.4.1:
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz#dced24f37f2624ed0281725d51d0e2e3fe677f8c"
-  integrity sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==
 
 whatwg-url@^7.0.0:
   version "7.1.0"
