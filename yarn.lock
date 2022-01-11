@@ -805,6 +805,14 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chalk@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
+  integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
 chokidar@3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.1.tgz#ee9ce7bbebd2b79f49f304799d5468e31e14e68a"
@@ -922,11 +930,6 @@ colorette@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
   integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
-
-colors@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
-  integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
 
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
@@ -1181,17 +1184,17 @@ data-uri-to-buffer@3.0.1:
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-3.0.1.tgz#594b8973938c5bc2c33046535785341abc4f3636"
   integrity sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==
 
-datocms-client@^3.5.11:
-  version "3.5.11"
-  resolved "https://registry.yarnpkg.com/datocms-client/-/datocms-client-3.5.11.tgz#b870c3074bfe0b76ea94ec26dbb2e8c4df458767"
-  integrity sha512-xrrxBddNpizd9pv1rYH+MmahLftwNm3lJHgTBzIBxVeU/r1pDkj9oA0zI31+60VOo8DgcvgqlFi6Mf0Yt9Ntng==
+datocms-client@^3.5.13:
+  version "3.5.13"
+  resolved "https://registry.yarnpkg.com/datocms-client/-/datocms-client-3.5.13.tgz#e05b91f9c38cb9a2a76dd8e1c7f03cb528781b4a"
+  integrity sha512-am9kg2rwoRJ8qOWYsv1jSCU3AXg4aRYmprXJ0+liXnndkQXTKb9TM9O/PjyovnbvDdBOioy2TWSOSL9xkX2ptg==
   dependencies:
     "@iarna/toml" "^2.2.3"
     arr-diff "^4.0.0"
     bottleneck "^2.19.5"
+    chalk "^4.1.2"
     chokidar "^3.3.0"
     clui "^0.3.6"
-    colors "^1.4.0"
     contentful-management "^7.9.0"
     core-js "^3.4.8"
     cross-env "^6.0.3"
